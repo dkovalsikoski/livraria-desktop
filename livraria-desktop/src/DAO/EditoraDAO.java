@@ -1,5 +1,6 @@
 package DAO;
 
+import model.Autor;
 import model.Editora;
 
 import java.sql.Connection;
@@ -12,7 +13,8 @@ import java.util.List;
 public class EditoraDAO {
     private Connection conexao;
 
-    public EditoraDAO() {conexao = new ConnectionFactory().getConnection();
+    public EditoraDAO() {
+        conexao = new ConnectionFactory().getConnection();
     }
 
     public void inserirEditora(Editora editora) {
@@ -69,6 +71,37 @@ public class EditoraDAO {
         }
         return editora;
     }
+    public Editora listarPorId(int id){
+        String sql = "select * from editoras where id = ?";
+
+        Editora editora = new Editora();
+
+        try{
+            //Prepara conexão
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1,id);
+
+            //Executa
+            ResultSet resultado = stmt.executeQuery();
+            resultado.next();
+            //Populando o objeto
+            editora.setId(resultado.getInt("id"));
+            editora.setNome(resultado.getString("nome"));
+            editora.setEmail(resultado.getString("email"));
+            editora.setEndereco(resultado.getString("endereco"));
+            editora.setBairro(resultado.getString("bairro"));
+            editora.setTelefone(resultado.getInt("telefone"));
+
+            //Fechar conexão
+            conexao.close();
+
+        }catch (SQLException e){
+            System.out.println("Parece que não foi desssa vez");
+            throw  new RuntimeException(e);
+        }
+
+        return editora;
+    }
 
     public void alteraEditora(Editora editora){
         String sql = "update editoras set nome =?, email=?, endereco=?, bairro=?, telefone=? where id = ?";
@@ -87,11 +120,11 @@ public class EditoraDAO {
         }
 
     }
-    public void deletar(int id){
-        String sql = "delete from editoras where id =?";
+    public void deletarEditora(Editora editora){
+        String sql = "delete from editoras where id = ?";
         try{
             PreparedStatement stmt = conexao.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setInt(1, editora.getId());
             stmt.execute();
             System.out.println("Foi pro saco");
             stmt.close();
@@ -100,7 +133,5 @@ public class EditoraDAO {
             throw new RuntimeException(e);
         }
     }
-
-
 }
 

@@ -78,6 +78,19 @@ public class AutorDAO {
     }
     public void deletar(Autor autor){
 
+        String sql = "delete from autores where id=?";
+
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+
+            stmt.setInt(1, autor.getId());
+
+            stmt.execute();
+            System.out.println("Beleza irmão, deu certo.");
+            stmt.close();
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
     public Autor listarPorId(int id){
         String sql = "select * from autores where id = ?";
