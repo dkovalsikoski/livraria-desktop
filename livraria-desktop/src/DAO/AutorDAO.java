@@ -61,7 +61,7 @@ public class AutorDAO {
 
         return autores;
     }
-    public void alterar(Autor autor){
+    public void alterarAutor(Autor autor){
         String sql = "update autores set nome = ?, email = ? where id =?";
         try{
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -70,9 +70,10 @@ public class AutorDAO {
             stmt.setInt(3, autor.getId());
 
             stmt.execute();
-
+            System.out.println("Alterou o indivíduo");
             stmt.close();
         }catch (SQLException e){
+            System.out.println("Foi não.");
             throw new RuntimeException(e);
         }
     }
