@@ -5,6 +5,7 @@ import model.Editora;
 import model.Livro;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +22,10 @@ public class LivroDAO {
         try{
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, livro.getTitulo());
-            stmt.setString(2, livro.getData_lacamento());
+            stmt.setString(2, livro.getData_lacamento().toString());
             stmt.setInt(3, livro.getQuantidade());
             stmt.setFloat(4, livro.getPreco());
-            stmt.setInt(5, livro.getEditora_id());
+            stmt.setInt(5, livro.getEditora_id().getId());
 
             stmt.execute();
             conexao.close();
@@ -48,10 +49,10 @@ public class LivroDAO {
             while (resultados.next()){
                 Livro liv = new Livro();
                 liv.setTitulo(resultados.getString("titulo"));
-                liv.setData_lacamento(resultados.getDate("data_lancamento"));
+                liv.setData_lacamento(LocalDate.parse(resultados.getDate("data_lancamento").toString()));
                 liv.setQuantidade(resultados.getInt("quantidade"));
                 liv.setPreco(resultados.getFloat("preco"));
-                liv.setEditora_id(resultados.getString("editora_id"));
+              //  liv.setEditora_id(new LivroDAO().listarPorId(resultados.getInt("editora_id")));
 
                 livros.add(liv);
 
@@ -66,11 +67,11 @@ public class LivroDAO {
         return livros;
     }
     public void alterar(Livro livro){
-        String sql = "update livros set titulo = ?, data_lancamento = ?, quantidade = ?, preco =?, editora_id = ? where id =?";
+        String sql = "update livros set titulo=?,data_lancamento=?,quantidade=?,preco=?, editora_id=? where id=?";
         try{
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, livro.getTitulo());
-            stmt.setDate(2, (Date) livro.getData_lacamento());
+            stmt.setDate(2, Date.valueOf(livro.getData_lacamento()));
             stmt.setInt(3, livro.getQuantidade());
             stmt.setFloat(4, livro.getPreco());
             stmt.setInt(5, livro.getEditora_id().getId());
@@ -82,9 +83,24 @@ public class LivroDAO {
             throw new RuntimeException(e);
         }
     }
-    public void deletar(Livro livro){
+    public void deletar(int id) {
 
+        String sql = "delete from livros where id=?";
+
+        try {
+            PreparedStatement st = conexao.prepareStatement(sql);
+
+            st.setInt(1, id);
+
+            st.execute();
+            System.out.println("Beleza irmão, deu certo.");
+            st.close();
+            conexao.close();
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
+
     public Livro listarPorId(int id){
         String sql = "select * from livros where id = ?";
 
@@ -101,10 +117,10 @@ public class LivroDAO {
             //Populando o objeto
             livros.setId(resultado.getInt("id"));
             livros.setTitulo(resultado.getString("titulo"));
-            livros.setData_lacamento(resultado.getDate("data_lancamento"));
+            livros.setData_lacamento(LocalDate.parse(resultado.getDate("data_lancamento").toString()));
             livros.setQuantidade(resultado.getInt("quantidade"));
             livros.setPreco(resultado.getFloat("preco"));
-            livros.setEditora_id(resultado.getInt("editora_id"));
+           // livros.setEditora_id(resultado.getInt("editora_id"));
 
             //Fechar conexão
             conexao.close();
@@ -117,4 +133,4 @@ public class LivroDAO {
     }
 }
 
-}
+

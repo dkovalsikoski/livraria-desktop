@@ -1,7 +1,5 @@
 package DAO;
 
-
-import model.Autor;
 import model.Editora;
 
 import java.sql.Connection;
@@ -59,6 +57,7 @@ public class EditoraDAO {
                 editoras.setTelefone(resultado.getInt("telefone"));
 
                 editora.add(editoras);
+                System.out.println("Blz, parece que deu tudo certo.");
             }
             //fecha conexao
             conexao.close();
@@ -70,6 +69,7 @@ public class EditoraDAO {
         }
         return editora;
     }
+
     public void alteraEditora(Editora editora){
         String sql = "update editoras set nome =?, email=?, endereco=?, bairro=?, telefone=? where id = ?";
         try{
@@ -86,6 +86,19 @@ public class EditoraDAO {
             throw new RuntimeException(e);
         }
 
+    }
+    public void deletar(int id){
+        String sql = "delete from editoras where id =?";
+        try{
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+            System.out.println("Foi pro saco");
+            stmt.close();
+        }catch (SQLException e){
+            System.out.printf("Deu ruim parça");
+            throw new RuntimeException(e);
+        }
     }
 
 

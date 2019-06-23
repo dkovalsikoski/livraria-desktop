@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     public Connection getConnection(){
         try {
-            return DriverManager.getConnection( "jdbc:mysql://localhost/db_livraria",
+            return DriverManager.getConnection( "jdbc:mysql://localhost/db_livraria?useTimezone=true&serverTimezone=UTC",
                     "livreiro", "Suporte99");
         } catch (SQLException e) {
             throw new RuntimeException(e);
