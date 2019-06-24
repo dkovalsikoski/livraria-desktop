@@ -2,26 +2,38 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="262.0" prefWidth="315.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AutorFormularioController">
+<AnchorPane prefHeight="431.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AutorFormularioController">
    <children>
-      <Pane prefHeight="58.0" prefWidth="315.0" style="-fx-background-color: #0000a7;">
+      <Pane prefHeight="58.0" prefWidth="549.0" style="-fx-background-color: #3ADF00;">
          <children>
-            <Label contentDisplay="TOP" layoutX="14.0" layoutY="21.0" text="Cadastro de Autores" textFill="WHITE">
+            <Label contentDisplay="TOP" layoutX="144.0" layoutY="8.0" text="Cadastro de Autores" textAlignment="JUSTIFY" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font size="29.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Label layoutX="43.0" layoutY="103.0" text="Nome:" />
-      <Label layoutX="41.0" layoutY="151.0" text="E-mail:" />
-      <TextField layoutX="96.0" layoutY="98.0" prefHeight="26.0" prefWidth="178.0" />
-      <TextField layoutX="96.0" layoutY="146.0" prefHeight="26.0" prefWidth="178.0" />
-      <Button layoutX="218.0" layoutY="207.0" mnemonicParsing="false" text="Salvar" textOverrun="CLIP" />
+      <Label layoutX="23.0" layoutY="75.0" text="Nome:" />
+      <Label layoutX="23.0" layoutY="113.0" prefHeight="17.0" prefWidth="36.0" text="E-mail:" />
+      <TextField layoutX="64.0" layoutY="71.0" prefHeight="26.0" prefWidth="261.0" />
+      <TextField layoutX="64.0" layoutY="109.0" prefHeight="26.0" prefWidth="261.0" />
+      <Button layoutX="232.0" layoutY="381.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="57.0" style="-fx-background-color: #3ADF00;" text="Salvar" textOverrun="CLIP" />
+      <TableView layoutX="16.0" layoutY="165.0" prefHeight="200.0" prefWidth="517.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Label layoutX="16.0" layoutY="142.0" text="Autores:" />
+      <Button layoutX="390.0" layoutY="382.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #FF0000;" text="Excluir" textFill="WHITE" />
+      <Button layoutX="312.0" layoutY="382.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #0101DF;" text="Listar" textFill="WHITE" />
+      <Button layoutX="467.0" layoutY="382.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #D8D8D8;" text="Voltar" />
    </children>
 </AnchorPane>
