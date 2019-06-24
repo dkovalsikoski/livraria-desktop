@@ -72,14 +72,16 @@ public class LivroDAO {
         String sql = "update livros set titulo=?,data_lancamento=?,quantidade=?,preco=?, editora_id=? where id=?";
         try{
             PreparedStatement stmt = conexao.prepareStatement(sql);
+
             stmt.setString(1, livro.getTitulo());
             stmt.setDate(2, Date.valueOf(livro.getData_lacamento()));
             stmt.setInt(3, livro.getQuantidade());
             stmt.setFloat(4, livro.getPreco());
             stmt.setInt(5, livro.getEditora_id().getId());
+            stmt.setInt(6, livro.getId());
 
             stmt.execute();
-
+            System.out.println("Alterou o infeliz");
             stmt.close();
         }catch (SQLException e){
             throw new RuntimeException(e);

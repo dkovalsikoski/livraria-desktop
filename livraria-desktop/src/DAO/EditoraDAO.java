@@ -18,7 +18,7 @@ public class EditoraDAO {
     }
 
     public void inserirEditora(Editora editora) {
-        String sql = "insert into editoras (nome, email, endereco, bairro, telefone) values (?,?,?,?,?)";
+        String sql = "insert into editoras (nome, site, endereco, bairro, telefone) values (?,?,?,?,?)";
 
         try {
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -105,7 +105,7 @@ public class EditoraDAO {
     }
 
     public void alteraEditora(Editora editora){
-        String sql = "update editoras set nome =?, email=?, endereco=?, bairro=?, telefone=? where id = ?";
+        String sql = "update editoras set nome =?, site=?, endereco=?, bairro=?, telefone=? where id = ?";
         try{
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, editora.getNome());
@@ -113,8 +113,10 @@ public class EditoraDAO {
             stmt.setString(3, editora.getEndereco());
             stmt.setString(4, editora.getBairro());
             stmt.setInt(5, editora.getTelefone());
+            stmt.setInt(6,editora.getId());
 
             stmt.execute();
+            System.out.println("Deu bom");
             stmt.close();
         }catch (SQLException e){
             throw new RuntimeException(e);

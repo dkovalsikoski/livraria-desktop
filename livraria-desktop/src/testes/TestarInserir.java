@@ -20,16 +20,6 @@ public class TestarInserir {
         autorDAO.inserirAutor(autor);
 
     }
-
-    public static void main(String[] args) {
-        Editora editora = new Editora();
-        editora.setNome("Teste Editora 1");
-        editora.setEmail("testeeditora@hotmail.com");
-        EditoraDAO editoraDAO = new EditoraDAO();
-        editoraDAO.inserirEditora(editora);
-
-    }*/
-       Editora editora = new Editora();
        EditoraDAO editoraDAO = new EditoraDAO();
        Livro livro = new Livro();
        livro.setTitulo("Livro Teste");
@@ -41,9 +31,17 @@ public class TestarInserir {
        LivroDAO livroDAO = new LivroDAO();
        livroDAO.inserirLivro(livro);
 
+*/
+    //public static void main(String[] args) {
+        Editora editora = new Editora();
+        editora.setNome("Teste Editora 1");
+        editora.setEndereco("la la");
+        editora.setBairro("g2");
+        editora.setSite("testeeditora.com");
+        EditoraDAO editoraDAO = new EditoraDAO();
+        editoraDAO.inserirEditora(editora);
 
-
-
+    }
    }
-}
+
 
