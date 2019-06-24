@@ -23,7 +23,7 @@ public class EditoraDAO {
         try {
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, editora.getNome());
-            stmt.setString(2, editora.getEmail());
+            stmt.setString(2, editora.getSite());
             stmt.setString(3, editora.getEndereco());
             stmt.setString(4, editora.getBairro());
             stmt.setInt(5, editora.getTelefone());
@@ -53,7 +53,7 @@ public class EditoraDAO {
                 Editora editoras = new Editora();
                 editoras.setId(resultado.getInt("id"));
                 editoras.setNome(resultado.getString("nome"));
-                editoras.setEmail(resultado.getString("email"));
+                editoras.setSite(resultado.getString("site"));
                 editoras.setEndereco(resultado.getString("endereco"));
                 editoras.setBairro(resultado.getString("bairro"));
                 editoras.setTelefone(resultado.getInt("telefone"));
@@ -71,7 +71,7 @@ public class EditoraDAO {
         }
         return editora;
     }
-    public Editora listarPorId(int id){
+    public Editora listarPorIdEditora(int id){
         String sql = "select * from editoras where id = ?";
 
         Editora editora = new Editora();
@@ -82,15 +82,16 @@ public class EditoraDAO {
             stmt.setInt(1,id);
 
             //Executa
-            ResultSet resultado = stmt.executeQuery();
-            resultado.next();
+            ResultSet resultadoRs = stmt.executeQuery();
+            resultadoRs.next();
+
             //Populando o objeto
-            editora.setId(resultado.getInt("id"));
-            editora.setNome(resultado.getString("nome"));
-            editora.setEmail(resultado.getString("email"));
-            editora.setEndereco(resultado.getString("endereco"));
-            editora.setBairro(resultado.getString("bairro"));
-            editora.setTelefone(resultado.getInt("telefone"));
+            editora.setId(resultadoRs.getInt("id"));
+            editora.setNome(resultadoRs.getString("nome"));
+            editora.setSite(resultadoRs.getString("site"));
+            editora.setEndereco(resultadoRs.getString("endereco"));
+            editora.setBairro(resultadoRs.getString("bairro"));
+            editora.setTelefone(resultadoRs.getInt("telefone"));
 
             //Fechar conexão
             conexao.close();
@@ -108,7 +109,7 @@ public class EditoraDAO {
         try{
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, editora.getNome());
-            stmt.setString(2, editora.getEmail());
+            stmt.setString(2, editora.getSite());
             stmt.setString(3, editora.getEndereco());
             stmt.setString(4, editora.getBairro());
             stmt.setInt(5, editora.getTelefone());

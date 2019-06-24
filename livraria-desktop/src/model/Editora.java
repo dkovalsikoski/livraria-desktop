@@ -3,7 +3,7 @@ package model;
 public class Editora {
     private int id;
     private String nome;
-    private String email;
+    private String site;
     private String endereco;
     private String bairro;
     private int telefone;
@@ -20,18 +20,17 @@ public class Editora {
         return nome;
     }
 
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getEndereco() {
         return endereco;
     }

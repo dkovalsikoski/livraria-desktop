@@ -16,25 +16,27 @@ public class LivroDAO {
         conexao = new ConnectionFactory().getConnection();
     }
 
-    public void inserir(Livro livro){
-        String sql = "insert into autores (titulo, data_lancamento, quantidade, preco, editora_id) values (?,?,?,?,?)";
+    public void inserirLivro(Livro livro){
+        String sql = "insert into livros (titulo, data_lancamento, quantidade, preco, editora_id) values (?,?,?,?,?)";
 
         try{
             PreparedStatement stmt = conexao.prepareStatement(sql);
+
             stmt.setString(1, livro.getTitulo());
-            stmt.setString(2, livro.getData_lacamento().toString());
+            stmt.setDate(2, Date.valueOf(livro.getData_lacamento()));
             stmt.setInt(3, livro.getQuantidade());
             stmt.setFloat(4, livro.getPreco());
             stmt.setInt(5, livro.getEditora_id().getId());
 
             stmt.execute();
+            System.out.println("O individuo ta lá");
             conexao.close();
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
 
     }
-    public List<Livro> listarTodos(){
+    public List<Livro> listarTodosLivros(){
         String sql = "select * from livros";
         List<Livro> livros = new ArrayList<>();
 
@@ -66,7 +68,7 @@ public class LivroDAO {
 
         return livros;
     }
-    public void alterar(Livro livro){
+    public void alterarLivro(Livro livro){
         String sql = "update livros set titulo=?,data_lancamento=?,quantidade=?,preco=?, editora_id=? where id=?";
         try{
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -83,14 +85,14 @@ public class LivroDAO {
             throw new RuntimeException(e);
         }
     }
-    public void deletar(int id) {
+    public void deletarLivro(Livro livro) {
 
         String sql = "delete from livros where id=?";
 
         try {
             PreparedStatement st = conexao.prepareStatement(sql);
 
-            st.setInt(1, id);
+            st.setInt(1, livro.getId());
 
             st.execute();
             System.out.println("Beleza irmão, deu certo.");
@@ -101,7 +103,7 @@ public class LivroDAO {
         }
     }
 
-    public Livro listarPorId(int id){
+    public Livro listarPorIdLivro(int id){
         String sql = "select * from livros where id = ?";
 
         Livro livros = new Livro();

@@ -16,7 +16,7 @@ public class AutorDAO {
         conexao = new ConnectionFactory().getConnection();
     }
 
-    public void inserir(Autor autor){
+    public void inserirAutor(Autor autor){
         String sql = "insert into autores (nome, email) values (?,?)";
 
         try{
@@ -31,7 +31,7 @@ public class AutorDAO {
         }
 
     }
-    public List<Autor> listarTodos(){
+    public List<Autor> listarTodosAutor(){
         String sql = "select * from autores";
         List<Autor> autores = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public class AutorDAO {
             throw new RuntimeException(e);
         }
     }
-    public void deletar(Autor autor){
+    public void deletarAutor(Autor autor){
 
         String sql = "delete from autores where id=?";
 
