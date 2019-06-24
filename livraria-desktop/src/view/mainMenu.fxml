@@ -18,20 +18,20 @@
                </font>
             </Label>
          </children></Pane>
-      <Button layoutX="69.0" layoutY="275.0" mnemonicParsing="false" onAction="#viewEditora" prefHeight="25.0" prefWidth="82.0" text="Editoras" />
-      <Button layoutX="259.0" layoutY="275.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Livros" />
-      <Button layoutX="447.0" layoutY="275.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Autores" />
-      <ImageView fitHeight="169.0" fitWidth="161.0" layoutX="418.0" layoutY="90.0" pickOnBounds="true" style="-fx-image: autor.jpg;">
+      <Button layoutX="69.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#viewEditora" prefHeight="25.0" prefWidth="82.0" text="Editoras" />
+      <Button layoutX="259.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#viewLivro" prefHeight="25.0" prefWidth="82.0" text="Livros" />
+      <Button layoutX="447.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#viewAutor" prefHeight="25.0" prefWidth="102.0" text="Autores" />
+      <ImageView fitHeight="169.0" fitWidth="161.0" layoutX="418.0" layoutY="90.0" pickOnBounds="true">
          <image>
             <Image url="@../images/autores.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="174.0" fitWidth="151.0" layoutX="237.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: autor.jpg;">
+      <ImageView fitHeight="174.0" fitWidth="151.0" layoutX="237.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/livro.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="130.0" fitWidth="143.0" layoutX="39.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: autor.jpg;">
+      <ImageView fitHeight="130.0" fitWidth="143.0" layoutX="39.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/editor.png" />
          </image>

@@ -20,4 +20,29 @@ public class MainMenuController {
             e.printStackTrace();
         }
     }
+    public void viewAutor(){
+        try{
+            Stage tela  = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/view/autor_formulario.fxml"));
+            tela.setTitle("Controle de Autores");
+            tela.setScene(new Scene(root, 639,412));
+            tela.show();
+        }catch (IOException e){
+            System.out.println("Desculpe, não foi possível.");
+            e.printStackTrace();
+        }
+    }
+    public void viewLivro(){
+        try{
+            Stage tela  = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/view/inseir_livro.fxml"));
+            tela.setTitle("Controle de Livros");
+            tela.setScene(new Scene(root, 910,600));
+            tela.show();
+        }catch (IOException e){
+            System.out.println("Desculpe, não foi possível.");
+            e.printStackTrace();
+        }
+    }
 }
+

@@ -1,5 +1,7 @@
 package DAO;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.Autor;
 import model.Editora;
 
@@ -35,41 +37,40 @@ public class EditoraDAO {
         }
 
     }
+    public ObservableList listarTodosEditora(){
+            String sql = "select * from editoras";
+            List<Editora> editora = new ArrayList<>();
 
-    public List<Editora> listarTodosEditora() {
-        String sql = "select * from editoras";
-        List<Editora> editora = new ArrayList<>();
+            try {
+                //prepara a conexão
+                PreparedStatement stmt = conexao.prepareStatement(sql);
 
-        try {
-            //prepara a conexão
-            PreparedStatement stmt = conexao.prepareStatement(sql);
+                //executa
+                ResultSet resultado = stmt.executeQuery();
 
-            //executa
-            ResultSet resultado = stmt.executeQuery();
+                //percorre os resultados de editora
 
-            //percorre os resultados de editora
+                while (resultado.next()) {
+                    Editora editoras = new Editora();
+                    editoras.setId(resultado.getInt("id"));
+                    editoras.setNome(resultado.getString("nome"));
+                    editoras.setSite(resultado.getString("site"));
+                    editoras.setEndereco(resultado.getString("endereco"));
+                    editoras.setBairro(resultado.getString("bairro"));
+                    editoras.setTelefone(resultado.getInt("telefone"));
 
-            while (resultado.next()) {
-                Editora editoras = new Editora();
-                editoras.setId(resultado.getInt("id"));
-                editoras.setNome(resultado.getString("nome"));
-                editoras.setSite(resultado.getString("site"));
-                editoras.setEndereco(resultado.getString("endereco"));
-                editoras.setBairro(resultado.getString("bairro"));
-                editoras.setTelefone(resultado.getInt("telefone"));
+                    editora.add(editoras);
+                    System.out.println("Blz, parece que deu tudo certo.");
+                }
+                //fecha conexao
+                conexao.close();
 
-                editora.add(editoras);
-                System.out.println("Blz, parece que deu tudo certo.");
+            } catch (SQLException e) {
+                System.out.println("Parece que deu cagadinha");
+                throw new RuntimeException(e);
             }
-            //fecha conexao
-            conexao.close();
-
-        } catch (SQLException e) {
-            System.out.println("Parece que deu cagadinha");
-            throw new RuntimeException(e);
-
-        }
-        return editora;
+            ObservableList retorno = FXCollections.observableArrayList(editora);
+            return  retorno;
     }
     public Editora listarPorIdEditora(int id){
         String sql = "select * from editoras where id = ?";
@@ -133,6 +134,22 @@ public class EditoraDAO {
             stmt.close();
         }catch (SQLException e){
             System.out.printf("Deu ruim parça");
+            throw new RuntimeException(e);
+        }
+    }
+    public int idNext() {
+        Connection conexao = new ConnectionFactory().getConnection();
+
+        String sql = "show table status like 'editoras'";
+
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            stmt.next();
+            return rs.getInt("auto_increment");
+        } catch (SQLException e) {
+            System.out.println("Algo errado não está certo");
             throw new RuntimeException(e);
         }
     }
